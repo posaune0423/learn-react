@@ -3,6 +3,8 @@ import firebase from 'firebase/app'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import ChatMessage from './ChatMessage'
 
+import chatroomStyles from '../styles/components/chatroom.module.css'
+
 function ChatRoom() {
   const dummy: any = useRef()
   const auth = firebase.auth()
@@ -31,20 +33,21 @@ function ChatRoom() {
 
   return (
     <>
-      <main>
+      <main className={chatroomStyles.main}>
         {messages && messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
 
         <span ref={dummy}></span>
       </main>
 
-      <form onSubmit={sendMessage}>
+      <form onSubmit={sendMessage} className={chatroomStyles.form}>
         <input
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
           placeholder="say something nice"
+          className={chatroomStyles.input}
         />
 
-        <button type="submit" disabled={!formValue}>
+        <button type="submit" disabled={!formValue} className={chatroomStyles.button}>
           🕊️
         </button>
       </form>
