@@ -35,10 +35,27 @@
   width: 20%;
   /* background-color: rgb(56, 56, 143); */
 }
+
+.image {
+  border: none;
+  color: white;
+  padding: 30px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 1.25rem;
+  background-color: white;
+}
+
+.image input {
+  display: none;
+}
+
 .input {
   line-height: 1.5;
   width: 100%;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   background: white;
   color: #232323;
   outline: none;
