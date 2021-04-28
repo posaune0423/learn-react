@@ -1,24 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Box, Button } from '@material-ui/core';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Hello World from React App !!!
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box m={2}>
+      <Button variant="contained">Test</Button>
+    </Box>
   );
 }
 
