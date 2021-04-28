@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
-import firebase from 'firebase/app'
+import firebase from '../lib/firebase'
+import 'firebase/storage'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import ChatMessage from './ChatMessage'
 import SendIcon from '@material-ui/icons/Send'
@@ -15,6 +16,8 @@ function ChatRoom() {
 
   const [messages] = useCollectionData(query, { idField: 'id' })
   const [formValue, setFormValue] = useState('')
+  const [fileFormData, setfileFormData] = useState()
+  const hasImage = fileFormData ? true : false
 
   const sendMessage = async (e) => {
     e.preventDefault()
@@ -25,11 +28,32 @@ function ChatRoom() {
       text: formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,
-      photoURL
+      photoURL,
+      attachment: fileFormData ? fileFormData.name : null
     })
 
     setFormValue('')
+    setfileFormData('')
     dummy.current.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const saveImage = (file) => {
+    const storageRef = firebase.storage().ref()
+    const fileRef = storageRef.child(file.name)
+    fileRef.put(file).then((result) => {
+      // console.log(result)
+    })
+  }
+
+  const setImage = (e) => {
+    if (!e.target.files) return
+    const file = e.target.files[0]
+    setfileFormData(file)
+    saveImage(file)
+  }
+
+  const clickInput = () => {
+    document.getElementById('image_input').click()
   }
 
   return (
@@ -42,7 +66,16 @@ function ChatRoom() {
 
       <div>
         <form onSubmit={sendMessage} className={chatroomStyles.form}>
-          <ImageIcon />
+          <div className={chatroomStyles.image}>
+            <ImageIcon color={hasImage ? 'disabled' : 'primary'} onClick={clickInput} />
+            <input
+              type="file"
+              accept="image/*,.png,.jpg,.jpeg,.gif"
+              id="image_input"
+              value=""
+              onChange={(e) => setImage(e)}
+            />
+          </div>
           <input
             value={formValue}
             onChange={(e) => setFormValue(e.target.value)}
@@ -50,7 +83,7 @@ function ChatRoom() {
             className={chatroomStyles.input}
           />
 
-          <button type="submit" disabled={!formValue} className={chatroomStyles.button}>
+          <button type="submit" disabled={!formValue && !fileFormData} className={chatroomStyles.button}>
             <SendIcon color="primary" />
           </button>
         </form>
