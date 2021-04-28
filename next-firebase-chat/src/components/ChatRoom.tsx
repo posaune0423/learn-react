@@ -1,17 +1,12 @@
-import React, { useRef, useState } from 'react';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
-import 'firebase/analytics';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
+import React, { useRef, useState } from 'react'
+import firebase from 'firebase/app'
+import { useCollectionData } from 'react-firebase-hooks/firestore'
 import ChatMessage from './ChatMessage'
-
-const auth = firebase.auth();
-const firestore = firebase.firestore();
-
 
 function ChatRoom() {
   const dummy: any = useRef()
+  const auth = firebase.auth()
+  const firestore = firebase.firestore()
   const messagesRef = firestore.collection('messages')
   const query = messagesRef.orderBy('createdAt').limit(25)
 

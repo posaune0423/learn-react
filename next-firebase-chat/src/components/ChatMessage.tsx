@@ -1,11 +1,8 @@
 import firebase from 'firebase/app'
 
-const auth = firebase.auth()
-
 function ChatMessage(props) {
   const { text, uid, photoURL } = props.message
-
-  const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received'
+  const messageClass = uid === firebase.auth().currentUser.uid ? 'sent' : 'received'
 
   return (
     <>
