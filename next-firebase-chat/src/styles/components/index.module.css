@@ -5,7 +5,7 @@
 }
 
 .appHeader {
-  background-color: #181717;
+  /* background-color: #181717;/ */
   height: 10vh;
   min-height: 50px;
   color: white;
@@ -24,7 +24,47 @@
 .appSection {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   min-height: 100vh;
-  background-color: rgb(40, 37, 53);
+  /* background-color: rgb(40, 37, 53); */
+  margin-top: 56px;
+}
+
+
+.top {
+  width: 100vw;
+  height: 100vh;
+  background-image: url(../../../public/images/brisbane_river.jpeg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #464646;
+}
+
+.top::before{
+  /* 透過した黒を上から重ねるイメージ */
+  background-color: rgba(0,0,0,0.4);
+  /* 自由に位置指定 */
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: ' ';
+}
+
+.top h2 {
+  margin: 0;
+  text-align: center;
+  position: relative;
+  top: 38vh;
+  font-weight: bold;
+  color: aliceblue;
+}
+
+.login {
+  text-align: center;
+  position: relative;
+  top: 45vh;
 }
