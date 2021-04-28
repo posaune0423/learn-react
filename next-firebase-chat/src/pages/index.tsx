@@ -5,6 +5,7 @@ import firebase from '../lib/firebase'
 import FirebaseAuth from '../components/FirebaseAuth'
 import LogOut from '../components/LogOut'
 import ChatRoom from '../components/ChatRoom'
+import indexStyles from '../styles/components/index.module.css'
 
 export default function Home() {
   const [user] = useAuthState(firebase.auth())
@@ -12,18 +13,18 @@ export default function Home() {
   if (user) {
     console.log(user)
     return (
-      <div>
+      <div className={indexStyles.app}>
         <Head>
           <title>Test Next App</title>
         </Head>
-        <header>
+        <header className={indexStyles.appHeader}>
           <LogOut />
         </header>
 
-        <section>
-          <p>{user.email}</p>
-          <Image priority src={user.photoURL} height={120} width={120} />
-          <h1>Hi, {user.displayName} You're successfully Logged in!</h1>
+        <section className={indexStyles.appSection}>
+          {/* <p>{user.email}</p> */}
+          {/* <Image priority src={user.photoURL} height={120} width={120} /> */}
+          {/* <h1>Hi, {user.displayName} You're successfully Logged in!</h1> */}
 
           <ChatRoom />
         </section>
