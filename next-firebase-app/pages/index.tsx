@@ -1,5 +1,5 @@
 import { useEffect, FC, useState } from "react";
-import { Button } from "@material-ui/core";
+import { Button, CircularProgress } from "@material-ui/core";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Image from "next/image";
@@ -8,23 +8,10 @@ import firebase from "../utils/firebase";
 const Home: FC = (props: any) => {
   const router = useRouter();
   const [currentUser, setCurrentUser] = useState<null | object>(null);
-  const [signinCheck, setSigninCheck] = useState(false);
-  const [signinedIn, setSigninedIn] = useState(false);
-  let _isMounted = false;
 
   useEffect(() => {
-    _isMounted = true;
     firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        setCurrentUser(user);
-        if (_isMounted) {
-          setSigninedIn(true);
-          setSigninCheck(true);
-          router.push("/");
-        }
-      } else {
-        router.push("/login");
-      }
+      user ? setCurrentUser(user) : router.push("/login");
     });
   }, []);
 
