@@ -2,7 +2,8 @@ import React, { useRef, useState } from 'react'
 import firebase from 'firebase/app'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import ChatMessage from './ChatMessage'
-
+import SendIcon from '@material-ui/icons/Send'
+import ImageIcon from '@material-ui/icons/Image'
 import chatroomStyles from '../styles/components/chatroom.module.css'
 
 function ChatRoom() {
@@ -39,18 +40,21 @@ function ChatRoom() {
         <span ref={dummy}></span>
       </main>
 
-      <form onSubmit={sendMessage} className={chatroomStyles.form}>
-        <input
-          value={formValue}
-          onChange={(e) => setFormValue(e.target.value)}
-          placeholder="say something nice"
-          className={chatroomStyles.input}
-        />
+      <div>
+        <form onSubmit={sendMessage} className={chatroomStyles.form}>
+          <ImageIcon />
+          <input
+            value={formValue}
+            onChange={(e) => setFormValue(e.target.value)}
+            placeholder="say something nice"
+            className={chatroomStyles.input}
+          />
 
-        <button type="submit" disabled={!formValue} className={chatroomStyles.button}>
-          🕊️
-        </button>
-      </form>
+          <button type="submit" disabled={!formValue} className={chatroomStyles.button}>
+            <SendIcon color="primary" />
+          </button>
+        </form>
+      </div>
     </>
   )
 }

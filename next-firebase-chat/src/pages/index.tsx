@@ -5,6 +5,8 @@ import firebase from '../lib/firebase'
 import FirebaseAuth from '../components/FirebaseAuth'
 import LogOut from '../components/LogOut'
 import ChatRoom from '../components/ChatRoom'
+import { AppBar, Button, Toolbar, IconButton, Typography } from '@material-ui/core'
+import MenuIcon from '@material-ui/icons/Menu'
 import indexStyles from '../styles/components/index.module.css'
 
 export default function Home() {
@@ -13,28 +15,33 @@ export default function Home() {
   if (user) {
     console.log(user)
     return (
-      <div className={indexStyles.app}>
+      <div>
         <Head>
           <title>Test Next App</title>
         </Head>
-        <header className={indexStyles.appHeader}>
-          <LogOut />
-        </header>
-
+        <AppBar position="fixed">
+          <Toolbar>
+            <IconButton edge="start" color="inherit" aria-label="menu">
+              <MenuIcon />
+            </IconButton>
+            <LogOut />
+          </Toolbar>
+        </AppBar>
         <section className={indexStyles.appSection}>
-          {/* <p>{user.email}</p> */}
-          {/* <Image priority src={user.photoURL} height={120} width={120} /> */}
-          {/* <h1>Hi, {user.displayName} You're successfully Logged in!</h1> */}
-
           <ChatRoom />
         </section>
       </div>
     )
   } else {
     return (
-      <div>
-        <h1>Please Log in</h1>
-        <FirebaseAuth />
+      <div className={indexStyles.top}>
+        <Head>
+          <title>Login Page</title>
+        </Head>
+        <h2>next firebase chat app</h2>
+        <div className={indexStyles.login}>
+          <FirebaseAuth />
+        </div>
       </div>
     )
   }

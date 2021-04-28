@@ -15,11 +15,11 @@ function LogOut() {
   }
 
   return (
-    <div>
-      <Button variant="contained" color="primary" onClick={signOut}>
+    <>
+      <Button color="inherit" onClick={signOut}>
         Logout
       </Button>
-    </div>
+    </>
   )
 }
 

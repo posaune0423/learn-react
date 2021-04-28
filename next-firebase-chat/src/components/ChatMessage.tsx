@@ -1,5 +1,6 @@
 import firebase from 'firebase/app'
 import chatmessageStyles from '../styles/components/chatmessage.module.css'
+import { Avatar } from '@material-ui/core'
 
 function ChatMessage(props) {
   const { text, uid, photoURL } = props.message
@@ -8,7 +9,7 @@ function ChatMessage(props) {
   return (
     <>
       <div className={`message ${messageClass}`}>
-        <img
+        <Avatar
           src={photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'}
           className={chatmessageStyles.img}
         />
@@ -25,14 +26,14 @@ function ChatMessage(props) {
         }
 
         .sent p {
-          color: white;
-          background: #0b93f6;
+          color: #23223;
+          background: #e8e8e8;
           align-self: flex-end;
         }
 
         .received p {
-          background: #e5e5ea;
           color: black;
+          background: #e8e8e8;
         }
       `}</style>
     </>
