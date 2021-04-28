@@ -1,0 +1,9 @@
+body {
+  background-color: #282c34;
+}
+
+ul,
+li {
+  text-align: left;
+  list-style: none;
+}
