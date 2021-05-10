@@ -1,10 +1,10 @@
-## Note About React
+# Note About React
 
-### Introduction
+## Introduction
 
 - [そもそも状態管理って？](https://zenn.dev/gagaga/articles/state-management)
 
-### 📌 [useState()](https://ja.reactjs.org/docs/hooks-reference.html#usestate)
+## 📌 [useState()](https://ja.reactjs.org/docs/hooks-reference.html#usestate)
 
 **一言で:** 関数コンポーネントで `state` を管理する API。`props`と`state`って何が違うん？ => [React における State と Props の違い](https://qiita.com/kyrieleison/items/78b3295ff3f37969ab50)
 
@@ -28,7 +28,7 @@ function Example() {
 }
 ```
 
-### ⚡️ [useEffect()](https://ja.reactjs.org/docs/hooks-reference.html#useeffect)
+## ⚡️ [useEffect()](https://ja.reactjs.org/docs/hooks-reference.html#useeffect)
 
 **一言で:** 関数コンポーネントで副作用を実行、制御するために使う API
 
@@ -58,7 +58,7 @@ function FriendStatus(props) {
 }
 ```
 
-### 🔍 [useContext()](https://ja.reactjs.org/docs/hooks-reference.html#usecontext)
+## 🔍 [useContext()](https://ja.reactjs.org/docs/hooks-reference.html#usecontext)
 
 **一言で:** `props`のバケツリレーを防ぐためにコンポーネントツリー内のグローバルな変数を共有する API
 
@@ -109,6 +109,32 @@ function ThemedButton() {
   )
 }
 ```
+
+## General Errors
+
+### ルール① フックはトップレベルでしか呼び出せない
+
+フックはメソッド内の一番外側でしか、呼び出すことができません。
+下の例を見てもらうと`useState`をprintメソッド内部で呼び出すことはできません。
+なぜなら、printメソッドを実行することで、使用されるフックの数が変わってしまうからです。
+フックを使用する場合は、コンポーネントを読み込んだ時点でどのフックが使われるかを明示しなければいけないので、printメソッドを実行して途中でフックの数が変わるといった挙動をしてしまうとエラーになってしまいます。
+
+```jsx
+import React, { useState } from "react";
+
+export default function App() {
+  const print = () => {
+    const [value, setValue] = useState(0)
+    console.log('print')
+  }
+  return (
+    <div>
+      <h1 onClick={() => print()}>Hello Qiita</h1>
+    </div>
+  );
+}
+```
+
 
 ### References
 
